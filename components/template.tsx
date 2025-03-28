@@ -25,16 +25,7 @@ export default function Template () {
 		      <DrawerTitle>Edit Template</DrawerTitle>
 		      <DrawerDescription>Pick the exercises for this template.</DrawerDescription>
 		    </DrawerHeader>
-			<div className="grid gap-4 p-4">
-			  <div className="grid grid-rows-4 items-center gap-3">
-			    <Label htmlFor="templatename" className="text-right justify-self-start">
-			      Template Name
-			    </Label>
-			    <Input name="templatename" type="text" placeholder="Push" className="col-span-3"/>
-			    </div>
-			    <TemplateClient/>
-			</div>
-
+		        <TemplateClient/>
 		    <DrawerFooter>
 		      <ExerciseBank/>
 		      <Button>Create</Button>
