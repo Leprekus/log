@@ -6,6 +6,7 @@ import { DialogFooter } from "./ui/dialog";
 import { Exercise } from "@/app/queries.actions";
 import { FormEvent, FormEventHandler } from "react";
 import { useTemplateStore } from "@/hooks/useTemplateStore";
+import { warn } from "console";
 
 interface ExerciseBankFormProps { exercise_bank: Exercise[] };
 export default function ExerciseBankForm({ exercise_bank }: ExerciseBankFormProps) {
@@ -13,8 +14,10 @@ export default function ExerciseBankForm({ exercise_bank }: ExerciseBankFormProp
 	const submit_handler = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
-		const ids: string[] = [ ...formData.values() ] as string[];
-		templateStore.add_exercise_ids(ids);
+		const exercises = [ ...formData.entries() ]
+			.map(([k, v]) => ({ name: k, exerciseid: v }) ) as Exercise[];
+		templateStore.add_exercises(exercises);
+		console.log(templateStore.exercises);
 	}
 	return (
 	<form onSubmit={submit_handler}> <div className="grid gap-4 py-4">
