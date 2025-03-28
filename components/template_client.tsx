@@ -1,10 +1,11 @@
 'use client'
 
-import { Exercise } from "@/app/queries.actions";
 import { select_exercises, select_is_template_store_dirty, useTemplateStore } from "@/hooks/useTemplateStore"
 import { Label } from "@radix-ui/react-label";
 import { Input } from "./ui/input";
 import { useEffect } from "react";
+import Exercise from "./exercise";
+import Header from "./header";
 
 export default function TemplateClient() {
 	const is_template_store_dirty = useTemplateStore(select_is_template_store_dirty);
@@ -23,7 +24,8 @@ export default function TemplateClient() {
 			    </Label>
 			    <Input name="templatename" type="text" placeholder="Push" className="col-span-3"/>
 			    </div>
-		{ exercises.length === 0 ? null : exercises.map((e) => <div key={e.exerciseid}>{e.name}</div>)}	
+			    <Header title="Exercises"/>
+		{ exercises.length === 0 ? null : exercises.map((e) => <Exercise key={e.exerciseid} title={e.name}/>)}	
 		</div>
 	)
 };

@@ -20,7 +20,7 @@ export default function Template () {
 		  	<DrawerTrigger asChild>
 				<Button>Create template</Button>
 			</DrawerTrigger>
-		  <DrawerContent>
+		  <DrawerContent className="lg:px-20">
 		    <DrawerHeader>
 		      <DrawerTitle>Edit Template</DrawerTitle>
 		      <DrawerDescription>Pick the exercises for this template.</DrawerDescription>
