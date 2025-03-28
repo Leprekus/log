@@ -17,7 +17,6 @@ export default function ExerciseBankForm({ exercise_bank }: ExerciseBankFormProp
 		const exercises = [ ...formData.entries() ]
 			.map(([k, v]) => ({ name: k, exerciseid: v }) ) as Exercise[];
 		templateStore.add_exercises(exercises);
-		console.log(templateStore.exercises);
 	}
 	return (
 	<form onSubmit={submit_handler}> <div className="grid gap-4 py-4">

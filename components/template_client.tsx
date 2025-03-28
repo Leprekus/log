@@ -1,15 +1,17 @@
 'use client'
 
+import { Exercise } from "@/app/queries.actions";
 import { useTemplateStore } from "@/hooks/useTemplateStore"
 
 export default function TemplateClient() {
-	const exercise_ids: string[] = useTemplateStore().exercise_ids;
+	const exercises: Exercise[] = useTemplateStore().exercises;
 
-	if(exercise_ids.length === 0)
+	if(exercises.length === 0)
 		return null
+	console.log(exercises);
 	return (
 		<>
-		{exercise_ids.map((e:string) => <div key={e}>{e}</div>)}	
+		{exercises.map((e) => <div key={e.exerciseid}>{e.name}</div>)}	
 		</>
 	)
 };
