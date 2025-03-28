@@ -1,3 +1,4 @@
+'use server'
 import {
   Dialog,
   DialogContent,
@@ -7,12 +8,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Button } from "./ui/button"
-import { get_exercise_bank } from "@/app/queries.actions"
+import { create_template_exercises, get_exercise_bank } from "@/app/queries.actions"
 import Item from "./item"
 import CreateExercise from "./create_exercise"
+import { test_action } from "@/app/server.actions"
+import ExerciseBankForm from "./exercise_bank_form"
 
 export default async function ExerciseBank() {
 	const exercise_bank = await get_exercise_bank();
@@ -28,17 +29,8 @@ export default async function ExerciseBank() {
             Choose your exercise here. Click save when you're done.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-		{ exercise_bank.data?.length === 0 ?
-			<DialogDescription> No exercises Found </DialogDescription>
-			:
-		  exercise_bank.data.map( exercise => <Item { ... exercise }/>)
-		}	
-        </div>
-        <DialogFooter>
-	  <CreateExercise/>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
+	<ExerciseBankForm exercise_bank={exercise_bank}/>
+	<CreateExercise/>
       </DialogContent>
     </Dialog>
   );

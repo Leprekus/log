@@ -11,16 +11,28 @@ export type Database = {
     Tables: {
       exercise: {
         Row: {
+          deleted: boolean
           exerciseid: string
           name: string
+          numberofsets: number
+          units: boolean
+          userid: string
         }
         Insert: {
+          deleted?: boolean
           exerciseid?: string
           name: string
+          numberofsets?: number
+          units?: boolean
+          userid: string
         }
         Update: {
+          deleted?: boolean
           exerciseid?: string
           name?: string
+          numberofsets?: number
+          units?: boolean
+          userid?: string
         }
         Relationships: []
       }
@@ -141,28 +153,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      fetch_todays_tempalte: {
-        Args: {
-          day: number
-        }
-        Returns: {
-          frequency: number
-          name: string
-          templateid: string
-        }[]
-      }
-      fetch_todays_template: {
-        Args: {
-          day: number
-        }
-        Returns: Record<string, unknown>
-      }
-      get_todays_templates: {
-        Args: {
-          day: number
-        }
-        Returns: Record<string, unknown>
-      }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never

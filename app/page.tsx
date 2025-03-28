@@ -1,3 +1,5 @@
+import CreateExercise from "@/components/create_exercise";
+import ExerciseBank from "@/components/exercise_bank";
 import Template from "@/components/template";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
@@ -7,10 +9,11 @@ export default async function Home() {
 	 if(error || !data?.user)
 	 	redirect('/login');
 
-	const templates = await supabase.from('templates').select('name, frequency');
-	if(templates.data?.length === 0)
-		return <Template/>
-	return <div> home </div>
+	return <div> 
+		<CreateExercise/>
+		<ExerciseBank/>
+		<Template/>
+	      </div>
 
 }
 

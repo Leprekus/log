@@ -26,19 +26,21 @@ export default async function CreateExercise() {
             Make changes to your exercise here. Click save when you're done.
           </DialogDescription>
         </DialogHeader>
+	<form action={create_exercise}>
         <div className="grid gap-4 py-4">
-          <form className="grid grid-cols-4 items-center gap-4" action={create_exercise}>
+          <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
               Name
             </Label>
-            <Input id="name" placeholder="Chest Press" className="col-span-3"/>
-		<DialogClose asChild>
-          		<Button type="submit" size='sm'>Save changes</Button>
-	  	</DialogClose>
-          </form>
+            <Input name="name" type="text" placeholder="Chest Press" className="col-span-3"/>
+	    </div>
         </div>
         <DialogFooter>
+		<DialogClose asChild>
+          		<Button type="submit" size='sm'>Save</Button>
+	  	</DialogClose>
 	</DialogFooter>
+	</form>
       </DialogContent>
     </Dialog>
   );
