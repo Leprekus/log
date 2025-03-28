@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button"
 import ExerciseBank from "./exercise_bank"
 import { Input } from "./ui/input"
 import { Label } from "@radix-ui/react-label";
+import TemplateClient from "./template_client";
 
 export default function Template () {
 	return (
@@ -31,6 +32,7 @@ export default function Template () {
 			    </Label>
 			    <Input name="templatename" type="text" placeholder="Push" className="col-span-3"/>
 			    </div>
+			    <TemplateClient/>
 			</div>
 
 		    <DrawerFooter>

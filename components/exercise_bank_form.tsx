@@ -1,5 +1,5 @@
 'use client'
-import { DialogDescription } from "@radix-ui/react-dialog";
+import { DialogClose, DialogDescription } from "@radix-ui/react-dialog";
 import Item from "./item";
 import { Button } from "./ui/button";
 import { DialogFooter } from "./ui/dialog";
@@ -15,7 +15,6 @@ export default function ExerciseBankForm({ exercise_bank }: ExerciseBankFormProp
 		const formData = new FormData(event.currentTarget);
 		const ids: string[] = [ ...formData.values() ] as string[];
 		templateStore.add_exercise_ids(ids);
-		console.log(templateStore.exercise_ids);
 	}
 	return (
 	<form onSubmit={submit_handler}> <div className="grid gap-4 py-4">
@@ -27,7 +26,9 @@ export default function ExerciseBankForm({ exercise_bank }: ExerciseBankFormProp
 		}	
         </div>
         <DialogFooter>
+	  <DialogClose asChild>
           <Button type="submit">Save changes</Button>
+	  </DialogClose>
         </DialogFooter>
 	</form>
 	);
