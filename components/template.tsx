@@ -16,7 +16,7 @@ import TemplateClient from "./template_client";
 
 export default function Template () {
 	return (
-		<Drawer>
+		<Drawer direction="bottom">
 		  	<DrawerTrigger asChild>
 				<Button>Create template</Button>
 			</DrawerTrigger>

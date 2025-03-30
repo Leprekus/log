@@ -27,7 +27,7 @@ export default function TemplateClient() {
 			    <Input name="templatename" type="text" placeholder="Push" className="col-span-3"/>
 			    </div>
 			    <Header title="Exercises"/>
-		<ScrollArea className="w-full h-[40vh] mx-auto overflow-auto">
+		<ScrollArea className="max-h-96 overflow-auto">
 		{ exercises.length === 0 ? null : 
 		  exercises.map((e) => 
 				<Exercise key={e.exerciseid} title={e.name}/>

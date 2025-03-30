@@ -1,3 +1,4 @@
+'use client'
 import {
   Table,
   TableBody,
@@ -36,23 +37,26 @@ export default function Exercise({ title }:ExerciseProps){
 				  );
 	 };
 	return (
-	<div className="px-12">
+	<>
 	<Header title={title}/>
 	<Table>
-	  <TableCaption>A list of your recent invoices.</TableCaption>
-	  <TableHeader>
+	<TableHeader>
 	    <TableRow>
 	      <TableHead className="w-[100px]">Set Number</TableHead>
 	      <TableHead className="text-center">{ units }</TableHead>
 	      <TableHead className="text-right">Reps</TableHead>
 	    </TableRow>
 	  </TableHeader>
-	  <TableBody className="h-[225px] block table-fixed overflow-y-auto">
+	  </Table>
+	<div className="px-12 max-h-96 overflow-y-auto">
+	<Table className="">
+	  <TableCaption>A list of your recent invoices.</TableCaption>
+	  <TableBody className="">
 	      { exerciseRecords }
 	  </TableBody>
 	</Table>
-	
-	  <Button  onClick={add_record}>Add set +</Button>
+	<Button  onClick={add_record}>Add set +</Button>
 	</div>
+	</>
 	);
 };
