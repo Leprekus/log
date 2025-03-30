@@ -13,9 +13,9 @@ import { Button } from "./ui/button";
 import { ReactNode } from 'react';
 import { Input } from "./ui/input";
 import Header from "./header";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 import { ChevronDown } from "lucide-react";
+import Item from "./item";
+import { Select, SelectContent, SelectTrigger, SelectGroup, SelectLabel, SelectItem, SelectValue } from "./ui/select";
 
 interface ExerciseRecordProps { n: number };
 function ExerciseRecord ({ n }: ExerciseRecordProps) {
@@ -69,3 +69,23 @@ export default function Exercise({ title }:ExerciseProps){
 	</div>
 	);
 };
+
+export function ExerciseTemplate ({ title }:ExerciseProps){
+	return <Item title={title} id={title}>	
+		<label> Number of Sets </label>
+		<Input type="number" className="w-20" placeholder="0"/>
+		<label> Units </label>
+		<Select>
+	              <SelectTrigger className="w-[180px]">
+			<SelectValue placeholder="kg/lbs" />
+		      </SelectTrigger>
+		      <SelectContent>
+			<SelectGroup>
+			  <SelectLabel>Units</SelectLabel>
+			  <SelectItem value="kg">kg</SelectItem>
+			  <SelectItem value="lbs">lbs</SelectItem>
+			</SelectGroup>
+		      </SelectContent>		
+		</Select>
+	</Item>
+}

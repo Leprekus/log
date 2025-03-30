@@ -10,8 +10,6 @@ import {
 } from "@/components/ui/drawer"
 import { Button } from "@/components/ui/button"
 import ExerciseBank from "./exercise_bank"
-import { Input } from "./ui/input"
-import { Label } from "@radix-ui/react-label";
 import TemplateClient from "./template_client";
 
 export default function Template () {
