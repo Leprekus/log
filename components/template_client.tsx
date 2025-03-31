@@ -13,7 +13,7 @@ import { TemplateType } from "@/app/queries.actions";
 
 export default function TemplateClient() {
 	const is_template_store_dirty = useTemplateStore(select_is_template_store_dirty);
-	const exercises = useTemplateStore(select_exercises);
+	const exercises = Object.values( useTemplateStore(select_exercises) );
 	useEffect(() =>{
 		const unload_handler = () => '';
 		if(is_template_store_dirty)
