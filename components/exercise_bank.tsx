@@ -9,10 +9,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "./ui/button"
-import { create_template_exercises, get_exercise_bank } from "@/app/queries.actions"
-import Item from "./item"
+import { get_exercise_bank } from "@/app/queries.actions"
 import CreateExercise from "./create_exercise"
-import { test_action } from "@/app/server.actions"
 import ExerciseBankForm from "./exercise_bank_form"
 
 export default async function ExerciseBank() {
