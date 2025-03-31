@@ -7,13 +7,15 @@ import { FormEvent, useEffect } from "react";
 import { ExerciseTemplate } from "./exercise";
 import Header from "./header";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { validate_number, validate_units } from "@/lib/utils";
+import { validate_frequency, validate_number, validate_units } from "@/lib/utils";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { TemplateType } from "@/app/queries.actions";
+import { Checkbox } from "./ui/checkbox";
 
 export default function TemplateClient() {
 	const is_template_store_dirty = useTemplateStore(select_is_template_store_dirty);
-	const exercises = Object.values( useTemplateStore(select_exercises) );
+	const exercise_map = useTemplateStore(select_exercises);
+	const exercises = Object.values( exercise_map );
 	useEffect(() =>{
 		const unload_handler = () => '';
 		if(is_template_store_dirty)
@@ -28,7 +30,8 @@ export default function TemplateClient() {
 	const create_template = (event: FormEvent<HTMLFormElement>) =>  {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
-		const [ templatename ] = formData.getAll('templatename');
+		const templatename = formData.get('templatename') as string;
+		const frequency = validate_frequency(formData.getAll("frequency") as string[]);
 		const exerciseid = formData.getAll('exerciseid');
 		const units = formData.getAll('units');
 		const numberofsets = formData.getAll('numberofsets');
@@ -36,15 +39,18 @@ export default function TemplateClient() {
 		if(!(exerciseid.length === units.length && units.length === numberofsets.length))
 			throw Error('Number of entries does not match'); //TODO: handle this
 
-		const entries = exerciseid.map((id, i) => ({ 
-			//templateid: '',
-			exerciseid: id,  
+		const entries = exerciseid.map((id, i):TemplateType => ({ 
+			userid: '',
+			templatename, 
+			frequency,
+
+			exerciseid: id as string,  
+			exercisename: exercise_map[id as string].name,
+			deleted: false,
 			units:  validate_units(units[i] as string),
 			numberofsets: validate_number(numberofsets[i] as string), //returns 0 if NaN or value is less than 0 otherwise returns an int
 		}));
-
-		console.log(entries);
-		
+		console.log(entries);	
 	};
 		
 	return (
@@ -67,13 +73,34 @@ export default function TemplateClient() {
 			<Header title="Frequency"/>
 			<div className="lg:px-40">
 			<ToggleGroup type="multiple">
-				<ToggleGroupItem className="size-12" value="MON">M</ToggleGroupItem>
-				<ToggleGroupItem className="size-12" value="TUE">T</ToggleGroupItem>
-				<ToggleGroupItem className="size-12" value="WED">W</ToggleGroupItem>
-				<ToggleGroupItem className="size-12" value="THU">R</ToggleGroupItem>
-				<ToggleGroupItem className="size-12" value="FRI">F</ToggleGroupItem>
-				<ToggleGroupItem className="size-12" value="SAT">S</ToggleGroupItem>
-				<ToggleGroupItem className="size-12" value="SUN">U</ToggleGroupItem>
+				<ToggleGroupItem className="size-12 relative" value="MON">
+				         M
+					<input type="checkbox" className="absolute inset-0 opacity-0"  name="frequency" value="M" /> 
+				</ToggleGroupItem>
+				<ToggleGroupItem className="size-12 relative" value="TUE">
+					T
+					<input type="checkbox" className="absolute inset-0 opacity-0"  name="frequency" value="T" /> 
+				</ToggleGroupItem>
+				<ToggleGroupItem className="size-12 relative" value="WED">
+					W
+					<input type="checkbox" className="absolute inset-0 opacity-0"  name="frequency" value="W" /> 
+				</ToggleGroupItem>
+				<ToggleGroupItem className="size-12 relative" value="THU">
+					R
+					<input type="checkbox" className="absolute inset-0 opacity-0"  name="frequency" value="R" /> 
+				</ToggleGroupItem>
+				<ToggleGroupItem className="size-12 relative" value="FRI">
+					F
+					<input type="checkbox" className="absolute inset-0 opacity-0"  name="frequency" value="F" /> 
+				</ToggleGroupItem>
+				<ToggleGroupItem className="size-12 relative" value="SAT">
+					S
+					<input type="checkbox" className="absolute inset-0 opacity-0"  name="frequency" value="S" /> 
+				</ToggleGroupItem>
+				<ToggleGroupItem className="size-12 relative" value="SUN">
+					U
+					<input type="checkbox" className="absolute inset-0 opacity-0"  name="frequency" value="U" /> 
+				</ToggleGroupItem>
 			</ToggleGroup>
 			</div>
 
