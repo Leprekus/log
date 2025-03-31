@@ -12,3 +12,11 @@ export const validate_number = (str: string): number => {
 		return 0;
 	return Number(str);
 };
+
+export const validate_units = (str: string): boolean => {
+	if(str === "kg")
+		return true;
+	if(str === "lbs")
+		return true;
+	return true; //default value
+};

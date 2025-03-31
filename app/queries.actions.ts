@@ -13,11 +13,20 @@ const get_client_and_user = async ():SupabaseAndUserPromise => {
 };
 
 
-export const create_template = async (formData: FormData) => {
-	console.log(...formData.entries());
-	const data = [ ...formData.values() ];
-	console.log(data);
+export interface TemplateType {
+	userid: string,
+	exerciseid: string,
+	exercisename: string,
+	numberofsets: number,
+	units: boolean,
+	deleted: boolean,
+	templatename: string,
+	frequency: number,
+}
+export const create_template = async (t: TemplateType[]) => {
+	console.log(t);
 	const [ supabase, user ] = await get_client_and_user();
+	supabase.rpc('create_template', t[0]) 
 }
 
 export type Exercise = { name: string, exerciseid: string };

@@ -88,46 +88,40 @@ export type Database = {
           },
         ]
       }
-      templates: {
+      template: {
         Row: {
           frequency: number
           name: string
           templateid: string
+          userid: string
         }
         Insert: {
           frequency: number
           name: string
           templateid?: string
+          userid: string
         }
         Update: {
           frequency?: number
           name?: string
           templateid?: string
+          userid?: string
         }
         Relationships: []
       }
       workout: {
         Row: {
-          date: string
           exerciseid: string | null
-          name: string
-          notes: string | null
           templateid: string | null
           workoutid: string
         }
         Insert: {
-          date: string
           exerciseid?: string | null
-          name: string
-          notes?: string | null
           templateid?: string | null
           workoutid?: string
         }
         Update: {
-          date?: string
           exerciseid?: string | null
-          name?: string
-          notes?: string | null
           templateid?: string | null
           workoutid?: string
         }
@@ -143,7 +137,7 @@ export type Database = {
             foreignKeyName: "workout_templateid_fkey"
             columns: ["templateid"]
             isOneToOne: false
-            referencedRelation: "templates"
+            referencedRelation: "template"
             referencedColumns: ["templateid"]
           },
         ]
@@ -153,7 +147,34 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      create_template: {
+        Args: {
+          userid: string
+          exerciseid: string
+          exercisename: string
+          numberofsets: number
+          units: boolean
+          deleted: boolean
+          templatename: string
+          frequency: number
+        }
+        Returns: undefined
+      }
+      hello_world: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
+      test:
+        | {
+            Args: Record<PropertyKey, never>
+            Returns: string
+          }
+        | {
+            Args: {
+              pipi: number
+            }
+            Returns: string
+          }
     }
     Enums: {
       [_ in never]: never

@@ -7,10 +7,9 @@ import { FormEvent, useEffect } from "react";
 import { ExerciseTemplate } from "./exercise";
 import Header from "./header";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { Button } from "./ui/button";
-import { validate_number } from "@/lib/utils";
-import { Toggle } from "@radix-ui/react-toggle";
+import { validate_number, validate_units } from "@/lib/utils";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { TemplateType } from "@/app/queries.actions";
 
 export default function TemplateClient() {
 	const is_template_store_dirty = useTemplateStore(select_is_template_store_dirty);
@@ -38,9 +37,9 @@ export default function TemplateClient() {
 			throw Error('Number of entries does not match'); //TODO: handle this
 
 		const entries = exerciseid.map((id, i) => ({ 
-			templateid: '',
+			//templateid: '',
 			exerciseid: id,  
-			units: (units[i] === "kg" || units[i] === "lbs") ? units[i]: "kg",
+			units:  validate_units(units[i] as string),
 			numberofsets: validate_number(numberofsets[i] as string), //returns 0 if NaN or value is less than 0 otherwise returns an int
 		}));
 
