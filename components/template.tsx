@@ -28,7 +28,7 @@ export default async function Template () {
 		    </DrawerHeader>
 		        <TemplateClient/>
 		    <DrawerFooter>
-		      <Button type="submit" form="template-form">Create Template</Button>
+		      <Button form="template-form" type="submit">Create Template</Button>
 		      <ExerciseBank/>
 		      <DrawerClose asChild>	
 			<Button variant="outline">Cancel</Button>

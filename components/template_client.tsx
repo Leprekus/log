@@ -1,7 +1,7 @@
 'use client'
 
 import { select_exercises, select_is_template_store_dirty, useTemplateStore } from "@/hooks/useTemplateStore"
-import { Label } from "@radix-ui/react-label";
+import { Label } from "@/components/ui/label";
 import { Input } from "./ui/input";
 import { FormEvent, useEffect } from "react";
 import { ExerciseTemplate } from "./exercise";
@@ -9,6 +9,8 @@ import Header from "./header";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { Button } from "./ui/button";
 import { validate_number } from "@/lib/utils";
+import { Toggle } from "@radix-ui/react-toggle";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export default function TemplateClient() {
 	const is_template_store_dirty = useTemplateStore(select_is_template_store_dirty);
@@ -47,7 +49,8 @@ export default function TemplateClient() {
 	};
 		
 	return (
-		<form onSubmit={create_template} name="template-form" className="grid gap-4 p-4">
+		<ScrollArea className="h-full overflow-x-hidden overflow-y-auto">
+		<form onSubmit={create_template} id="template-form" className="min-h-[375px] max-h[375px] lg:min-h[672px] lg:max-h[672px] grid gap-4 p-4">
 			  <div className="grid grid-rows-2 items-center gap-3">
 			    <Label htmlFor="templatename" className="text-right justify-self-start">
 			      Template Name
@@ -55,14 +58,28 @@ export default function TemplateClient() {
 			    <Input required name="templatename" type="text" placeholder="Push" className="col-span-3"/>
 			    </div>
 			    <Header title="Exercises"/>
-		<ScrollArea className="max-h-80 lg:max-h-96 overflow-auto px-10 lg:px-40">
+		<ScrollArea className="h-56 lg:max-h-96 overflow-auto px-10 lg:px-40">
 		{ exercises.length === 0 ? null : 
 		  exercises.map((e) => 
 				<ExerciseTemplate key={e.exerciseid} title={e.name} id={e.exerciseid}/>
 			       )
 		}	
 		</ScrollArea>
-		<Button type="submit">Create Template</Button>
+			<Header title="Frequency"/>
+			<div className="lg:px-40">
+			<ToggleGroup type="multiple">
+				<ToggleGroupItem className="size-12" value="MON">M</ToggleGroupItem>
+				<ToggleGroupItem className="size-12" value="TUE">T</ToggleGroupItem>
+				<ToggleGroupItem className="size-12" value="WED">W</ToggleGroupItem>
+				<ToggleGroupItem className="size-12" value="THU">R</ToggleGroupItem>
+				<ToggleGroupItem className="size-12" value="FRI">F</ToggleGroupItem>
+				<ToggleGroupItem className="size-12" value="SAT">S</ToggleGroupItem>
+				<ToggleGroupItem className="size-12" value="SUN">U</ToggleGroupItem>
+			</ToggleGroup>
+			</div>
+
 		</form>
+		<Button form="template-form" type="submit">Create Template</Button>
+		</ScrollArea>
 	)
 };
