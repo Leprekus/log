@@ -13,8 +13,10 @@ const get_client_and_user = async ():SupabaseAndUserPromise => {
 };
 
 
-export const create_template_exercises = async (formData: FormData) => {
+export const create_template = async (formData: FormData) => {
+	console.log(...formData.entries());
 	const data = [ ...formData.values() ];
+	console.log(data);
 	const [ supabase, user ] = await get_client_and_user();
 }
 

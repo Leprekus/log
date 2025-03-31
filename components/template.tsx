@@ -1,3 +1,4 @@
+'use server'
 import {
   Drawer,
   DrawerClose,
@@ -11,8 +12,10 @@ import {
 import { Button } from "@/components/ui/button"
 import ExerciseBank from "./exercise_bank"
 import TemplateClient from "./template_client";
+import { test_action } from "@/app/server.actions";
+import { create_template } from "@/app/queries.actions";
 
-export default function Template () {
+export default async function Template () {
 	return (
 		<Drawer direction="bottom">
 		  	<DrawerTrigger asChild>
@@ -25,9 +28,9 @@ export default function Template () {
 		    </DrawerHeader>
 		        <TemplateClient/>
 		    <DrawerFooter>
+		      <Button type="submit" form="template-form">Create Template</Button>
 		      <ExerciseBank/>
-		      <Button>Create</Button>
-		      <DrawerClose asChild>
+		      <DrawerClose asChild>	
 			<Button variant="outline">Cancel</Button>
 		      </DrawerClose>
 		    </DrawerFooter>

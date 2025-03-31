@@ -17,6 +17,7 @@ export default function ExerciseBankForm({ exercise_bank }: ExerciseBankFormProp
 			.map(([k, v]) => ({ name: k, exerciseid: v }) ) as Exercise[];
 		dispatch_save_exercise(exercises);
 	}
+	//TODO: implement retry fn
 	return (
 	<form onSubmit={submit_handler}> 
 	<div className="grid gap-4 py-4 max-h-[425px] overflow-auto mb-2">

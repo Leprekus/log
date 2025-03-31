@@ -29,8 +29,8 @@ function ExerciseRecord ({ n }: ExerciseRecordProps) {
 	);
 };
 
-interface ExerciseProps { title: string };
-export default function Exercise({ title }:ExerciseProps){
+interface ExerciseProps { title: string, id: string };
+export default function Exercise({ title, id }:ExerciseProps){
 	const [ units, setUnits ] = useState<'lbs' | 'kg'>('kg');
 	const [ exerciseRecords, setExerciseRecords ] = useState<ReactNode[]>([ <ExerciseRecord n={1} key={self.crypto.randomUUID()}/> ]);
 	const [ isCollapsed, setIsCollapsed ] = useState(false);
@@ -70,12 +70,13 @@ export default function Exercise({ title }:ExerciseProps){
 	);
 };
 
-export function ExerciseTemplate ({ title }:ExerciseProps){
+export function ExerciseTemplate ({ title, id }:ExerciseProps){
 	return <Item title={title} id={title}>	
+		<input type="text" name="exerciseid" value={id} className="hidden" readOnly/>
 		<label> Number of Sets </label>
-		<Input type="number" className="w-20" placeholder="0"/>
+		<Input type="number" name="numberofsets" className="w-20" placeholder="0"/>
 		<label> Units </label>
-		<Select>
+		<Select name="units" value="kg">
 	              <SelectTrigger className="w-[180px]">
 			<SelectValue placeholder="kg/lbs" />
 		      </SelectTrigger>
