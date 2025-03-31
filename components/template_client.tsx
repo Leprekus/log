@@ -58,7 +58,7 @@ export default function TemplateClient() {
 			    <Input required name="templatename" type="text" placeholder="Push" className="col-span-3"/>
 			    </div>
 			    <Header title="Exercises"/>
-		<ScrollArea className="h-56 lg:max-h-96 overflow-auto px-10 lg:px-40">
+		<ScrollArea className="h-56 lg:max-h-96 red-400 w-full overflow-x-hidden overflow-y-auto lg:px-40">
 		{ exercises.length === 0 ? null : 
 		  exercises.map((e) => 
 				<ExerciseTemplate key={e.exerciseid} title={e.name} id={e.exerciseid}/>
@@ -79,7 +79,6 @@ export default function TemplateClient() {
 			</div>
 
 		</form>
-		<Button form="template-form" type="submit">Create Template</Button>
 		</ScrollArea>
 	)
 };
