@@ -4,13 +4,14 @@ import { select_exercises, select_is_template_store_dirty, useTemplateStore } fr
 import { Label } from "@/components/ui/label";
 import { Input } from "./ui/input";
 import { FormEvent, useEffect } from "react";
-import { ExerciseTemplate } from "./exercise";
+import Exercise, { ExerciseTemplate } from "./exercise";
 import Header from "./header";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { validate_frequency, validate_number, validate_units } from "@/lib/utils";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { ExerciseRecords, TemplateType } from "@/app/queries.actions";
 import { Checkbox } from "./ui/checkbox";
+import { DrawerDescription } from "./ui/drawer";
 
 export default function TemplateClient() {
 	const is_template_store_dirty = useTemplateStore(select_is_template_store_dirty);
@@ -76,8 +77,13 @@ export default function TemplateClient() {
 			    <Input required name="templatename" type="text" placeholder="Push" className="col-span-3"/>
 			    </div>
 			    <Header title="Exercises"/>
+			    <div className="grid grid-cols-3 justify-center lg:px-40">
+			    	<Label>Title</Label>
+				<Label>Number of sets</Label>
+				<Label>Units</Label>
+			    </div>
 		<ScrollArea className="h-56 lg:max-h-96 red-400 w-full overflow-x-hidden overflow-y-auto lg:px-40">
-		{ exercises.length === 0 ? null : 
+		{ exercises.length === 0 ? <DrawerDescription>Add or Create an exercise to get started</DrawerDescription> : 
 		  exercises.map((e) => 
 				<ExerciseTemplate key={e.exerciseid} title={e.name} id={e.exerciseid}/>
 			       )

@@ -73,11 +73,9 @@ export default function Exercise({ title, id }:ExerciseProps){
 export function ExerciseTemplate ({ title, id }:ExerciseProps){
 	return <Item title={title} id={title}>	
 		<input type="text" name="exerciseid" value={id} className="hidden" readOnly/>
-		<label> Number of Sets </label>
-		<Input type="number" name="numberofsets" className="w-20" placeholder="0"/>
-		<label> Units </label>
-		<Select name="units" value="kg">
-	              <SelectTrigger className="w-[180px]">
+		<Input type="number" className="w-20 lg:min-w-48" name="numberofsets" placeholder="0"/>
+		<Select name="units">
+	              <SelectTrigger className="min-w-[100px] lg:min-w-48">
 			<SelectValue placeholder="kg/lbs" />
 		      </SelectTrigger>
 		      <SelectContent>
@@ -89,4 +87,6 @@ export function ExerciseTemplate ({ title, id }:ExerciseProps){
 		      </SelectContent>		
 		</Select>
 	</Item>
-}
+};
+
+
