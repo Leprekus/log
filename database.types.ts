@@ -113,16 +113,19 @@ export type Database = {
         Row: {
           exerciseid: string | null
           templateid: string | null
+          userid: string | null
           workoutid: string
         }
         Insert: {
           exerciseid?: string | null
           templateid?: string | null
+          userid?: string | null
           workoutid?: string
         }
         Update: {
           exerciseid?: string | null
           templateid?: string | null
+          userid?: string | null
           workoutid?: string
         }
         Relationships: [
@@ -147,19 +150,46 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      create_template: {
-        Args: {
-          userid: string
-          exerciseid: string
-          exercisename: string
-          numberofsets: number
-          units: boolean
-          deleted: boolean
-          templatename: string
-          frequency: number
-        }
-        Returns: undefined
-      }
+      create_template:
+        | {
+            Args: {
+              input_userid: string
+              exercises_r: Database["public"]["CompositeTypes"]["exercise_record"][]
+              input_templatename: string
+              input_frequency: number
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              input_userid: string
+              input_exerciseid: string
+              input_exercisename: string
+              input_numberofsets: number
+              input_units: boolean
+              input_deleted: boolean
+              input_templatename: string
+              input_frequency: number
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              input_userid: string
+              input_templatename: string
+              input_frequency: number
+            }
+            Returns: undefined
+          }
+        | {
+            Args: {
+              input_userid: string
+              record: Database["public"]["Tables"]["exercise"]["Row"][]
+              input_templatename: string
+              input_frequency: number
+            }
+            Returns: undefined
+          }
       hello_world: {
         Args: Record<PropertyKey, never>
         Returns: string
@@ -180,7 +210,13 @@ export type Database = {
       [_ in never]: never
     }
     CompositeTypes: {
-      [_ in never]: never
+      exercise_record: {
+        exerciseid: string | null
+        exercisename: string | null
+        numberofsets: number | null
+        units: boolean | null
+        deleted: boolean | null
+      }
     }
   }
 }

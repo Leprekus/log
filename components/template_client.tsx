@@ -9,7 +9,7 @@ import Header from "./header";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { validate_frequency, validate_number, validate_units } from "@/lib/utils";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { TemplateType } from "@/app/queries.actions";
+import { ExerciseRecords, TemplateType } from "@/app/queries.actions";
 import { Checkbox } from "./ui/checkbox";
 
 export default function TemplateClient() {
@@ -27,7 +27,7 @@ export default function TemplateClient() {
 	//templates creates name and frequency
 	//exercises are updated with the new values
 	//workouts maps templateid -> exerciseid
-	const create_template = (event: FormEvent<HTMLFormElement>) =>  {
+	const create_template = async (event: FormEvent<HTMLFormElement>) =>  {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
 		const templatename = formData.get('templatename') as string;
@@ -39,18 +39,31 @@ export default function TemplateClient() {
 		if(!(exerciseid.length === units.length && units.length === numberofsets.length))
 			throw Error('Number of entries does not match'); //TODO: handle this
 
-		const entries = exerciseid.map((id, i):TemplateType => ({ 
-			userid: '',
-			templatename, 
-			frequency,
-
+		const exercises_r = exerciseid.map((id, i):ExerciseRecords => ({ 
 			exerciseid: id as string,  
 			exercisename: exercise_map[id as string].name,
 			deleted: false,
 			units:  validate_units(units[i] as string),
 			numberofsets: validate_number(numberofsets[i] as string), //returns 0 if NaN or value is less than 0 otherwise returns an int
 		}));
-		console.log(entries);	
+		const template:TemplateType = {
+			input_userid: '',
+			input_templatename: templatename,
+			input_frequency: frequency,
+			exercises_r: exercises_r
+		};
+		
+		const body = JSON.stringify(template);
+		console.log(body);
+		const res = await fetch('/api/template', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body
+			});
+		const data = await res.json();	
+		console.log(data);
 	};
 		
 	return (
