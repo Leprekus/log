@@ -6,6 +6,7 @@ import { DialogFooter } from "./ui/dialog";
 import { Exercise } from "@/app/queries.actions";
 import { FormEvent } from "react";
 import { save_exercises, useTemplateStore } from "@/hooks/useTemplateStore";
+import { Checkbox } from "./ui/checkbox";
 
 interface ExerciseBankFormProps { exercise_bank: Exercise[] };
 export default function ExerciseBankForm({ exercise_bank }: ExerciseBankFormProps) {
@@ -25,12 +26,14 @@ export default function ExerciseBankForm({ exercise_bank }: ExerciseBankFormProp
 			<DialogDescription> No exercises Found </DialogDescription> :
 		  exercise_bank === null ? 
 		  	<div> Could not load. <button> Retry </button></div> :
-		  exercise_bank.map( e => <Item key={e.name+e.exerciseid} title={e.name} id={e.exerciseid}/>)
+		  exercise_bank.map( e => <Item key={e.name+e.exerciseid} title={e.name} id={e.exerciseid}>
+					  	<Checkbox id={e.exerciseid} name={e.name} value={e.exerciseid}/>
+		 			  </Item>)
 		}	
         </div>
         <DialogFooter>
 	  <DialogClose asChild>
-          <Button type="submit">Save changes</Button>
+          <Button type="submit">Add Exercises</Button>
 	  </DialogClose>
         </DialogFooter>
 	</form>

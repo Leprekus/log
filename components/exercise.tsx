@@ -74,7 +74,7 @@ export function ExerciseTemplate ({ title, id }:ExerciseProps){
 	return <Item title={title} id={title}>	
 		<input type="text" name="exerciseid" value={id} className="hidden" readOnly/>
 		<label> Number of Sets </label>
-		<Input type="number" name="numberofsets" placeholder="0"/>
+		<Input type="number" name="numberofsets" className="w-20" placeholder="0"/>
 		<label> Units </label>
 		<Select name="units" value="kg">
 	              <SelectTrigger className="w-[180px]">
