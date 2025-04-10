@@ -47,4 +47,10 @@ export const validate_frequency = (str: string[]): number => {
 			frequency |= U;
 	});
 	return frequency;
-}
+};
+
+//returns an integer 1-7, 1 = monday, 7 = sunday
+export const get_today = () => {
+	const date = new Date();
+	return date.getDay();
+};

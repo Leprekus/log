@@ -1,6 +1,7 @@
 import CreateExercise from "@/components/create_exercise";
 import ExerciseBank from "@/components/exercise_bank";
 import Template from "@/components/template";
+import Workout from "@/components/workout";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 export default async function Home() {
@@ -13,6 +14,7 @@ export default async function Home() {
 		<CreateExercise/>
 		<ExerciseBank/>
 		<Template/>
+		<Workout/>
 	      </div>
 
 }
