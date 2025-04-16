@@ -44,7 +44,6 @@ export type Database = {
           setid: string
           units: boolean
           weight: number
-          workoutid: string
         }
         Insert: {
           exerciseid?: string | null
@@ -53,7 +52,6 @@ export type Database = {
           setid?: string
           units?: boolean
           weight?: number
-          workoutid: string
         }
         Update: {
           exerciseid?: string | null
@@ -62,7 +60,6 @@ export type Database = {
           setid?: string
           units?: boolean
           weight?: number
-          workoutid?: string
         }
         Relationships: [
           {
@@ -78,13 +75,6 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "exercise"
             referencedColumns: ["name"]
-          },
-          {
-            foreignKeyName: "sets_workoutid_fkey"
-            columns: ["workoutid"]
-            isOneToOne: false
-            referencedRelation: "workout"
-            referencedColumns: ["workoutid"]
           },
         ]
       }
@@ -114,19 +104,16 @@ export type Database = {
           exerciseid: string
           templateid: string
           userid: string
-          workoutid: string
         }
         Insert: {
           exerciseid: string
           templateid: string
           userid: string
-          workoutid?: string
         }
         Update: {
           exerciseid?: string
           templateid?: string
           userid?: string
-          workoutid?: string
         }
         Relationships: [
           {
@@ -187,6 +174,19 @@ export type Database = {
           frequency: number
           name: string
           templateid: string
+          userid: string
+        }[]
+      }
+      get_workout: {
+        Args:
+          | { input_tempalteid: string; input_userid: string }
+          | { input_templateid: string }
+        Returns: {
+          deleted: boolean
+          exerciseid: string
+          name: string
+          numberofsets: number
+          units: boolean
           userid: string
         }[]
       }

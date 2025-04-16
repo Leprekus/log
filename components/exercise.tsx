@@ -20,7 +20,7 @@ import { Select, SelectContent, SelectTrigger, SelectGroup, SelectLabel, SelectI
 interface ExerciseRecordProps { n: number };
 function ExerciseRecord ({ n }: ExerciseRecordProps) {
 	return(
-	   <TableRow key={`${self.crypto.randomUUID()}`}>
+	   <TableRow key={`${ Date.now() }`}>
 	      <TableCell className="font-medium"><span className="rounded-md">{ n }</span></TableCell>
 	      <TableCell className="text-center"><Input type="number" placeholder="0"/></TableCell>
 	      <TableCell className="text-right"><Input type="number" placeholder="0"/></TableCell>
@@ -32,18 +32,18 @@ function ExerciseRecord ({ n }: ExerciseRecordProps) {
 interface ExerciseProps { title: string, id: string };
 export default function Exercise({ title, id }:ExerciseProps){
 	const [ units, setUnits ] = useState<'lbs' | 'kg'>('kg');
-	const [ exerciseRecords, setExerciseRecords ] = useState<ReactNode[]>([ <ExerciseRecord n={1} key={self.crypto.randomUUID()}/> ]);
+	const [ exerciseRecords, setExerciseRecords ] = useState<ReactNode[]>([ <ExerciseRecord n={1} key={ Date.now() }/> ]);
 	const [ isCollapsed, setIsCollapsed ] = useState(false);
 	const add_record = () => {
 		setExerciseRecords( prev => 
-				   [ ...prev, <ExerciseRecord n={ prev.length + 1} key={self.crypto.randomUUID()} /> ]
+				   [ ...prev, <ExerciseRecord n={ prev.length + 1} key={Date.now()} /> ]
 				  );
 	 };
 	return (
 	<div>
-	    <div className="flex justify-between h-12 items-center transition-all hover:bg-accent rounded-md px-4" onClick={()=>setIsCollapsed(!isCollapsed)}>
+	    <div className="flex justify-between h-14 items-center transition-all hover:bg-accent rounded-md px-4" onClick={()=>setIsCollapsed(!isCollapsed)}>
 	    <Header title={title}/>
-	    <span ><ChevronDown className={`transition-all text-muted-foreground ${ isCollapsed ? "rotate-180" : ""}` }/></span> 
+	    <span ><ChevronDown className={`transition-all ${ isCollapsed ? "rotate-180 text-muted-foreground" : "text-muted-accent"}` }/></span> 
 	    </div>	
 	    <hr className="w-full"/>
 		<div className={ `transition-all ${isCollapsed ? "h-0" : "size-fit"} overflow-hidden w-full` }>
@@ -56,7 +56,7 @@ export default function Exercise({ title, id }:ExerciseProps){
 			    </TableRow>
 			  </TableHeader>
 			  </Table>
-			<div className="min-h-48 max-h-48 lg:max-h-64 lg:min-h-64 overflow-y-auto">
+			<div className="min-h-48 /*max--h--48*/ h-[90vh] lg:max-h-64 lg:min-h-64 overflow-y-auto">
 			<Table className="">
 			  <TableCaption>A list of your recent invoices.</TableCaption>
 			  <TableBody className="">

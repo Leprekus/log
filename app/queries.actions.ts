@@ -49,13 +49,16 @@ export const get_todays_template = async () => {
 	const [ supabase, user ] = await get_client_and_user();
 	const day = 0b0000001 << (get_today() - 1);
 	return await supabase.rpc('get_todays_template', { input_userid: user.id, input_frequency: day });
-
-
 };
 
 export const get_templates = async () => {
 	const [ supabase, user ] = await get_client_and_user();
 	return await supabase.from('template').select('*').eq('userid', user.id).limit(10);
+}
+
+export const get_workout = async ( templateid: string ) => {
+	const [ supabase ] = await get_client_and_user();
+	return await supabase.rpc('get_workout', { input_templateid: templateid });
 }
 
 export const create_exercise = async (formData: FormData) => {
