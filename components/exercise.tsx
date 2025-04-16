@@ -16,14 +16,16 @@ import Header from "./header";
 import { ChevronDown } from "lucide-react";
 import Item from "./item";
 import { Select, SelectContent, SelectTrigger, SelectGroup, SelectLabel, SelectItem, SelectValue } from "./ui/select";
+import { Checkbox } from "./ui/checkbox";
 
 interface ExerciseRecordProps { n: number };
 function ExerciseRecord ({ n }: ExerciseRecordProps) {
 	return(
-	   <TableRow key={`${ Date.now() }`}>
-	      <TableCell className="font-medium"><span className="rounded-md">{ n }</span></TableCell>
-	      <TableCell className="text-center"><Input type="number" placeholder="0"/></TableCell>
-	      <TableCell className="text-right"><Input type="number" placeholder="0"/></TableCell>
+	   <TableRow key={`${ Date.now() }`} className="grid grid-cols-4 justify-between">
+	      <TableCell className="flex items-center justify-center font-medium"><span className="rounded-md">{ n }</span></TableCell>
+	      <TableCell className="flex items-center justify-center text-center"><Input className="w-40" type="number" placeholder="0"/></TableCell>
+	      <TableCell className="flex items-center justify-center text-right"><Input  className="w-40"type="number" placeholder="0"/></TableCell>
+	      <TableCell className="flex items-center justify-center text-right"><Checkbox/></TableCell>
 	    </TableRow>
 
 	);
@@ -49,10 +51,11 @@ export default function Exercise({ title, id }:ExerciseProps){
 		<div className={ `transition-all ${isCollapsed ? "h-0" : "size-fit"} overflow-hidden w-full` }>
 			<Table>
 			<TableHeader>
-			    <TableRow>
-			      <TableHead className="w-[100px]">Set Number</TableHead>
-			      <TableHead className="text-center">{ units }</TableHead>
-			      <TableHead className="text-right">Reps</TableHead>
+			    <TableRow className="grid grid-cols-4">
+			      <TableHead className="flex items-center justify-center">Set Number</TableHead>
+			      <TableHead className="flex items-center justify-center text-center">{ units }</TableHead>
+			      <TableHead className="flex items-center justify-center text-center">Reps</TableHead>
+			      <TableHead className="flex items-center justify-center text-right">Completed</TableHead>
 			    </TableRow>
 			  </TableHeader>
 			  </Table>

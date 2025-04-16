@@ -6,11 +6,11 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export type Database = {
+export type database = {
   public: {
-    Tables: {
+    tables: {
       exercise: {
-        Row: {
+        row: {
           deleted: boolean
           exerciseid: string
           name: string
